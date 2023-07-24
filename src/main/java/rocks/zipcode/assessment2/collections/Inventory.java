@@ -11,16 +11,17 @@ import java.util.Map;
 
 
 public class Inventory {
-    Map<String, Integer> inventory;
-    ArrayList inventoryArr;
+    Map<String, Integer> inventory = new HashMap<>();
+
 
     /**
      * @param strings list of strings to add / remove / fetch from
      */
     public Inventory(List<String> strings) {
-    for(String p: strings)
+
+    for(int i =0; i<strings.size();i++)
     {
-        inventory.put(p,0);
+        inventory.put(strings.get(i),0);
     }
     }
 
@@ -28,16 +29,20 @@ public class Inventory {
      * nullary constructor initializes a new list
      */
     public Inventory() {
-         inventory = new HashMap<>();
+
     }
 
     /**
      * @param item - increment the number of this item in stock by 1
      */
     public void addItemToInventory(String item) {
-
-    inventory.put(item,inventory.get(item)+1);
-
+    if(inventory.containsKey(item)) {
+        inventory.put(item, inventory.get(item) + 1);
+    }
+    else
+    {
+        inventory.put(item,1);
+    }
 
     }
 
@@ -45,7 +50,10 @@ public class Inventory {
      * @param item - decrement the number of this item in stock by 1
      */
     public void removeItemFromInventory(String item) {
-        return;
+
+        inventory.put(item,inventory.get(item)-1);
+
+
     }
 
     /**
@@ -53,6 +61,13 @@ public class Inventory {
      * @return - return the number of items
      */
     public Integer getItemQuantity(String item) {
-        return null;
+        if(inventory.get(item)==null)
+        {
+            return 0;
+        }
+        else
+        {
+            return inventory.get(item);
+        }
     }
 }
